@@ -38,6 +38,14 @@ npm start
 http://localhost:3000
 ```
 
+## Funcionalidades
+
+- Envio de prompts para a API Gemini.
+- Exibição da resposta retornada pela IA.
+- Status local da API em `/api/health`.
+- Contador de caracteres no prompt.
+- Mensagens de erro mais claras para validações e falhas da API.
+
 ## Testes
 
 Execute os testes unitários com:
@@ -50,6 +58,8 @@ Os testes validam:
 
 - O envio do prompt, garantindo que prompts inválidos não chamem a API e que o payload da Gemini seja montado corretamente.
 - O recebimento da resposta, garantindo que o texto retornado pela IA seja tratado corretamente.
+- O tratamento de erros retornados pela API Gemini.
+- O endpoint `/api/health`, que informa se a chave está configurada e qual modelo está em uso.
 
 ## Estrutura
 
@@ -65,7 +75,8 @@ public/
   app.js             # chamada da interface para o backend
   styles.css         # estilos da tela
 test/
-  promptService.test.js # testes de envio e recebimento
+  promptService.test.js # testes da lógica de envio, resposta e erros
+  server.test.js        # teste do endpoint de status
 ```
 
 ## Integração Contínua

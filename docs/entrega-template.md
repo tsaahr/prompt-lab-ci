@@ -1,45 +1,46 @@
 # Atividade Integradora - Desenvolvimento de Software
 
-## Nome de usuario do GitHub
+## Nome de usuário do GitHub
 
-Preencher com seu usuario do GitHub.
+Preencher com seu usuário do GitHub.
 
-## Link direto para o repositorio
+## Link direto para o repositório
 
-Preencher com o link do repositorio publicado no GitHub.
+Preencher com o link do repositório publicado no GitHub.
 
-## Explicacao do codigo
+## Explicação do código
 
-O projeto Prompt Lab CI foi desenvolvido em JavaScript com Node.js 20. A aplicacao possui uma interface web simples em HTML, CSS e JavaScript puro, na qual o usuario digita um prompt, envia para o backend e visualiza a resposta retornada pela API Gemini.
+O projeto Prompt Lab CI foi desenvolvido em JavaScript com Node.js 20. A aplicação possui uma interface web simples em HTML, CSS e JavaScript puro, na qual o usuário digita um prompt, envia para o backend e visualiza a resposta retornada pela API Gemini.
 
-A organizacao principal do codigo e:
+A organização principal do código é:
 
 - `public/`: arquivos da interface web.
-- `src/server.js`: servidor HTTP e rotas da aplicacao.
-- `src/promptService.js`: validacao do prompt e coordenacao do envio.
-- `src/geminiClient.js`: comunicacao com a API Gemini.
-- `test/`: testes unitarios.
-- `.github/workflows/ci.yml`: pipeline de Integracao Continua.
+- `src/server.js`: servidor HTTP, rota de envio de prompt e rota `/api/health`.
+- `src/promptService.js`: validação do prompt e coordenação do envio.
+- `src/geminiClient.js`: comunicação com a API Gemini.
+- `test/`: testes unitários.
+- `.github/workflows/ci.yml`: pipeline de Integração Contínua.
 
-## Explicacao dos testes unitarios
+## Explicação dos testes unitários
 
-Os testes foram criados com o modulo nativo `node:test`.
+Os testes foram criados com o módulo nativo `node:test`.
 
-O primeiro teste valida o envio do prompt: quando o prompt e invalido, a aplicacao retorna erro e nao chama a API.
+O primeiro grupo de testes valida o envio do prompt: quando o prompt é inválido, a aplicação retorna erro e não chama a API. Também existe validação para impedir prompts acima do limite definido.
 
-O segundo teste valida o recebimento da resposta: quando o cliente de IA retorna uma resposta, o servico devolve o prompt normalizado, a resposta e a data de criacao.
+O segundo grupo valida o recebimento da resposta: quando o cliente de IA retorna uma resposta, o serviço devolve o prompt normalizado, a resposta e a data de criação.
 
-Ha tambem um teste auxiliar para garantir que a estrutura de resposta do Gemini seja convertida corretamente para texto.
+Também há testes para garantir que o payload enviado ao Gemini seja montado corretamente, que erros retornados pela API sejam tratados de forma clara e que o endpoint `/api/health` informe o status da configuração.
 
-## Boas praticas aplicadas
+## Boas práticas aplicadas
 
-- Nomes significativos para classes, funcoes e arquivos.
-- Separacao de responsabilidades entre servidor, servico de regra de negocio e cliente de API.
-- Injecao de dependencia no cliente de IA, facilitando testes sem rede.
-- Validacao de entrada antes de chamar servicos externos.
+- Nomes significativos para classes, funções e arquivos.
+- Separação de responsabilidades entre servidor, serviço de regra de negócio, cliente de API e interface.
+- Injeção de dependência no cliente de IA, facilitando testes sem rede.
+- Validação de entrada antes de chamar serviços externos.
+- Variáveis sensíveis em `.env`, sem chave hardcoded no código.
 - Testes automatizados isolados da API real.
-- Pipeline de CI para executar os testes a cada envio ao repositorio.
+- Pipeline de CI para executar os testes a cada envio ao repositório.
 
-## Observacao sobre colaborador
+## Observação sobre colaborador
 
-Adicionar o professor `rodrigo.barreto.cc@gmail.com` como colaborador do repositorio no GitHub antes da entrega.
+Adicionar o professor `rodrigo.barreto.cc@gmail.com` como colaborador do repositório no GitHub antes da entrega.

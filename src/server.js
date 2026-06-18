@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { loadConfig } from "./config.js";
 import { loadEnvFile } from "./env.js";
 import { GeminiClient } from "./geminiClient.js";
-import { PromptService } from "./promptService.js";
+import { PromptService, ValidationError } from "./promptService.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,6 +63,15 @@ export function createServer() {
         return;
       }
 
+      if (request.method === "GET" && request.url === "/api/health") {
+        sendJson(response, 200, {
+          status: "ok",
+          geminiConfigured: Boolean(config.geminiApiKey),
+          model: config.geminiModel
+        });
+        return;
+      }
+
       if (request.method === "GET") {
         await serveStatic(request, response);
         return;
@@ -70,7 +79,7 @@ export function createServer() {
 
       sendJson(response, 404, { error: "Rota nao encontrada." });
     } catch (error) {
-      const statusCode = error instanceof SyntaxError ? 400 : 500;
+      const statusCode = error instanceof SyntaxError || error instanceof ValidationError ? 400 : 500;
       sendJson(response, statusCode, { error: error.message });
     }
   });

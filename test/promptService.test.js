@@ -17,6 +17,16 @@ describe("PromptService", () => {
     assert.equal(called, false);
   });
 
+  it("bloqueia prompts acima do limite permitido", async () => {
+    const service = new PromptService({
+      async generateContent() {
+        return "nao deve ser chamado";
+      }
+    });
+
+    await assert.rejects(() => service.sendPrompt("a".repeat(2001)), /no maximo 2000 caracteres/);
+  });
+
   it("valida o recebimento e retorna a resposta da IA", async () => {
     const service = new PromptService({
       async generateContent(prompt) {
@@ -87,5 +97,22 @@ describe("GeminiClient", () => {
     });
 
     assert.equal(text, "Primeira parte.\nSegunda parte.");
+  });
+
+  it("extrai mensagem de erro retornada pela API Gemini", async () => {
+    const client = new GeminiClient({ apiKey: "fake-key" });
+
+    const message = await client.parseError({
+      status: 404,
+      async json() {
+        return {
+          error: {
+            message: "models/gemini-antigo is not found"
+          }
+        };
+      }
+    });
+
+    assert.equal(message, "Falha ao consultar Gemini: models/gemini-antigo is not found");
   });
 });
