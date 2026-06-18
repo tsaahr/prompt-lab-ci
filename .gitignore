@@ -1,5 +1,7 @@
 node_modules/
 .env
+READMEAI.md
+.READMEAI.md
 .DS_Store
 coverage/
 npm-debug.log*
