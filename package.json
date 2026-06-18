@@ -1,0 +1,21 @@
+{
+  "name": "prompt-lab-ci",
+  "version": "1.0.0",
+  "description": "Aplicacao simples para enviar prompts ao Gemini e validar o ciclo de integracao continua.",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "gemini",
+    "ci",
+    "testes",
+    "atividade-integradora"
+  ],
+  "license": "MIT"
+}

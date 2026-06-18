@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prompt Lab CI</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+        <h1>Prompt Lab CI</h1>
+      </div>
+      <div class="status-bar" aria-label="Status do projeto">
+        <span class="status-chip status-chip--ready">Pronto para testar</span>
+        <span class="status-chip status-chip--api">Gemini API</span>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="panel" aria-labelledby="prompt-title">
+        <h2 id="prompt-title">Prompt</h2>
+        <form id="prompt-form" class="prompt-form">
+          <textarea
+            id="prompt"
+            name="prompt"
+            minlength="3"
+            required
+            placeholder="Digite seu prompt aqui..."
+          ></textarea>
+          <div class="actions">
+            <p id="message" class="message" role="status"></p>
+            <button type="submit">Enviar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="answer-title">
+        <h2 id="answer-title">Resposta</h2>
+        <output id="answer" class="answer">A resposta do Gemini aparecera aqui...</output>
+      </section>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
