@@ -61,7 +61,7 @@ describe("GeminiClient", () => {
 
     assert.equal(answer, "Resposta simulada.");
     assert.equal(requests.length, 1);
-    assert.match(requests[0].url, /models\/gemini-1\.5-flash:generateContent\?key=fake-key$/);
+    assert.match(requests[0].url, /models\/gemini-2\.5-flash:generateContent\?key=fake-key$/);
     assert.equal(requests[0].options.method, "POST");
     assert.equal(requests[0].options.headers["Content-Type"], "application/json");
     assert.deepEqual(JSON.parse(requests[0].options.body), {

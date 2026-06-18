@@ -12,7 +12,12 @@ const __dirname = path.dirname(__filename);
 const publicDir = path.join(__dirname, "..", "public");
 loadEnvFile();
 const config = loadConfig();
-const promptService = new PromptService(new GeminiClient({ apiKey: config.geminiApiKey }));
+const promptService = new PromptService(
+  new GeminiClient({
+    apiKey: config.geminiApiKey,
+    model: config.geminiModel
+  })
+);
 
 const contentTypes = {
   ".html": "text/html; charset=utf-8",

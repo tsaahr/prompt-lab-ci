@@ -1,8 +1,9 @@
-const GEMINI_MODEL = "gemini-1.5-flash";
+const DEFAULT_GEMINI_MODEL = "gemini-2.5-flash";
 
 export class GeminiClient {
-  constructor({ apiKey, fetchImpl = fetch } = {}) {
+  constructor({ apiKey, model = DEFAULT_GEMINI_MODEL, fetchImpl = fetch } = {}) {
     this.apiKey = apiKey;
+    this.model = model.replace(/^models\//, "");
     this.fetchImpl = fetchImpl;
   }
 
@@ -11,7 +12,7 @@ export class GeminiClient {
       throw new Error("GEMINI_API_KEY nao configurada.");
     }
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${this.apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:generateContent?key=${this.apiKey}`;
     const response = await this.fetchImpl(endpoint, {
       method: "POST",
       headers: {
@@ -27,7 +28,7 @@ export class GeminiClient {
     });
 
     if (!response.ok) {
-      throw new Error(`Falha ao consultar Gemini: HTTP ${response.status}`);
+      throw new Error(await this.parseError(response));
     }
 
     const data = await response.json();
@@ -43,5 +44,20 @@ export class GeminiClient {
     }
 
     return text;
+  }
+
+  async parseError(response) {
+    try {
+      const data = await response.json();
+      const message = data?.error?.message;
+
+      if (message) {
+        return `Falha ao consultar Gemini: ${message}`;
+      }
+    } catch {
+      // Mantem a mensagem generica quando a API nao retorna JSON.
+    }
+
+    return `Falha ao consultar Gemini: HTTP ${response.status}`;
   }
 }
