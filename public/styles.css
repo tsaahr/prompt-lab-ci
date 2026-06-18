@@ -8,6 +8,8 @@
   --accent: #0f8b8d;
   --accent-dark: #0a6f70;
   --warning: #f59e0b;
+  --danger: #b42318;
+  --success: #067647;
   --shadow: 0 12px 32px rgba(31, 41, 55, 0.08);
 }
 
@@ -108,6 +110,18 @@ h2 {
   background: var(--warning);
 }
 
+.status-chip[data-state="ready"]::before {
+  background: var(--success);
+}
+
+.status-chip[data-state="warning"]::before {
+  background: var(--warning);
+}
+
+.status-chip[data-state="error"]::before {
+  background: var(--danger);
+}
+
 .workspace {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -167,10 +181,33 @@ textarea {
   gap: 16px;
 }
 
+.feedback {
+  display: grid;
+  gap: 6px;
+}
+
 .message {
   min-height: 24px;
   color: var(--muted);
   font-size: 15px;
+}
+
+.message[data-type="success"] {
+  color: var(--success);
+}
+
+.message[data-type="error"] {
+  color: var(--danger);
+}
+
+.counter {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.counter[data-warning="true"] {
+  color: var(--warning);
+  font-weight: 700;
 }
 
 button {

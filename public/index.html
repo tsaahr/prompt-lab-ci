@@ -13,8 +13,8 @@
         <h1>Prompt Lab CI</h1>
       </div>
       <div class="status-bar" aria-label="Status do projeto">
-        <span class="status-chip status-chip--ready">Pronto para testar</span>
-        <span class="status-chip status-chip--api">Gemini API</span>
+        <span id="app-status" class="status-chip status-chip--ready">Verificando API</span>
+        <span id="model-status" class="status-chip status-chip--api">Gemini API</span>
       </div>
     </header>
 
@@ -26,11 +26,15 @@
             id="prompt"
             name="prompt"
             minlength="3"
+            maxlength="2000"
             required
             placeholder="Digite seu prompt aqui..."
           ></textarea>
           <div class="actions">
-            <p id="message" class="message" role="status"></p>
+            <div class="feedback">
+              <p id="message" class="message" role="status"></p>
+              <p id="counter" class="counter">0/2000 caracteres</p>
+            </div>
             <button type="submit">Enviar</button>
           </div>
         </form>
@@ -38,7 +42,7 @@
 
       <section class="panel" aria-labelledby="answer-title">
         <h2 id="answer-title">Resposta</h2>
-        <output id="answer" class="answer">A resposta do Gemini aparecera aqui...</output>
+        <output id="answer" class="answer">A resposta do Gemini aparecerá aqui...</output>
       </section>
     </main>
 
